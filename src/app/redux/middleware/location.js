@@ -16,7 +16,7 @@ const fetchLocationsMiddleware = (store) => {
   const {
     context: { width, height },
     dataSource: { user, device, timestamp },
-    filters: { accuracyThreshold },
+    filters: { accuracyThreshold, mapFitType },
     map: { viewport },
   } = store.getState();
 
@@ -55,7 +55,7 @@ const fetchLocationsMiddleware = (store) => {
         latitude,
         longitude,
         zoom,
-      } = fitMapBounds(json, accuracyThreshold, width, height);
+      } = fitMapBounds(json, accuracyThreshold, mapFitType, width, height);
 
       // The map fit is computationally intensive. It is possible that a new network request
       // completes before a prior request's computation has completed, at which point the current
