@@ -3,8 +3,12 @@ import {
   SET_DEVICE,
   SET_TIMESTAMP_START,
   SET_TIMESTAMP_END,
+  SET_MAP_FIT_TYPE,
 } from 'app/redux/actions/data-source';
 import createReducer from 'app/redux/reducers/create-reducer';
+
+export const MAP_FIT_TYPE_CURRENT = 'current';
+export const MAP_FIT_TYPE_FULL = 'full';
 
 const initialStateFactory = () => {
   // By default, set the start timestamp to the beginning of the current day, in local time.
@@ -21,6 +25,7 @@ const initialStateFactory = () => {
       start: today,
       end: tomorrow,
     },
+    mapFitType: MAP_FIT_TYPE_CURRENT,
   };
 };
 
@@ -50,11 +55,17 @@ const setTimestampEndReducer = (state, action) => ({
   },
 });
 
+const setMapFitTypeReducer = (state, action) => ({
+  ...state,
+  mapFitType: action.payload.fitType,
+});
+
 const reducerMapping = {
   [SET_USER]: setUserReducer,
   [SET_DEVICE]: setDeviceReducer,
   [SET_TIMESTAMP_START]: setTimestampStartReducer,
   [SET_TIMESTAMP_END]: setTimestampEndReducer,
+  [SET_MAP_FIT_TYPE]: setMapFitTypeReducer,
 };
 
 export default createReducer(reducerMapping, initialStateFactory());

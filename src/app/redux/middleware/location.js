@@ -15,8 +15,8 @@ let locationLoadID = 0;
 const fetchLocationsMiddleware = (store) => {
   const {
     context: { width, height },
-    dataSource: { user, device, timestamp },
-    filters: { accuracyThreshold, mapFitType },
+    dataSource: { user, device, timestamp, mapFitType },
+    filters: { accuracyThreshold },
     map: { viewport },
   } = store.getState();
 

@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Label, SelectList, Spacing, Text, TextField } from 'react-elemental';
+import { Label, SelectList, Spacing, Tabs, Text, TextField } from 'react-elemental';
+import {
+  MAP_FIT_TYPE_CURRENT,
+  MAP_FIT_TYPE_FULL,
+} from 'app/redux/reducers/data-source';
 
 /**
  * Controls for setting parameters related to the source of location data for visualization.
@@ -10,10 +14,12 @@ const DataSource = ({
   devices,
   timestampStart,
   timestampEnd,
+  mapFitType,
   onUserChange,
   onDeviceChange,
   onTimestampStartChange,
   onTimestampEndChange,
+  onMapFitTypeChange,
 }) => (
   <div>
     <Spacing size="small" bottom>
@@ -73,6 +79,24 @@ const DataSource = ({
         />
       </Spacing>
     </Spacing>
+
+    <Spacing bottom style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Text size="kilo" color="gray50" uppercase bold>
+        Map Fitting
+      </Text>
+      <Text size="lambda" color="gray25">
+        Choose how the map is fit to location data
+      </Text>
+    </Spacing>
+
+    <Tabs
+      onChange={onMapFitTypeChange}
+      value={mapFitType}
+      options={[
+        { value: MAP_FIT_TYPE_CURRENT, label: 'Current' },
+        { value: MAP_FIT_TYPE_FULL, label: 'Full' },
+      ]}
+    />
   </div>
 );
 
@@ -93,6 +117,12 @@ DataSource.propTypes = {
   onTimestampStartChange: PropTypes.func.isRequired,
   // Callback to invoke when the ending timestamp is changed
   onTimestampEndChange: PropTypes.func.isRequired,
+  // Map Fit Types
+  mapFitType: PropTypes.oneOf([
+    MAP_FIT_TYPE_CURRENT,
+    MAP_FIT_TYPE_FULL,
+  ]).isRequired,
+  onMapFitTypeChange: PropTypes.func.isRequired,
 };
 
 export default DataSource;

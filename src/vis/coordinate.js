@@ -2,7 +2,7 @@ import WebMercatorViewport from 'viewport-mercator-project';
 import {
   MAP_FIT_TYPE_CURRENT,
   MAP_FIT_TYPE_FULL,
-} from 'app/redux/reducers/filters';
+} from 'app/redux/reducers/data-source';
 
 /**
  * Create a unique array according a particular predicate.

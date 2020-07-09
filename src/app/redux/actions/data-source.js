@@ -2,6 +2,7 @@ export const SET_USER = 'SET_USER';
 export const SET_DEVICE = 'SET_DEVICE';
 export const SET_TIMESTAMP_START = 'SET_TIMESTAMP_START';
 export const SET_TIMESTAMP_END = 'SET_TIMESTAMP_END';
+export const SET_MAP_FIT_TYPE = 'SET_MAP_FIT_TYPE';
 
 /**
  * Set the user whose data should be queried.
@@ -45,4 +46,15 @@ export const setTimestampStart = (timestamp) => ({
 export const setTimestampEnd = (timestamp) => ({
   type: SET_TIMESTAMP_END,
   payload: { timestamp },
+});
+
+/**
+ * Set the map fit display type on the map.
+ *
+ * @param {string} fitType One of the map fit type string constants.
+ * @return {Object} Action for setting the map fit type.
+ */
+export const setMapFitType = (fitType) => ({
+  type: SET_MAP_FIT_TYPE,
+  payload: { fitType },
 });
