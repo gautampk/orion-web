@@ -4,12 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Elemental } from 'react-elemental';
 import { karlaBold, karlaRegular } from 'react-elemental-fonts';
-import Raven from 'raven-js';
 import PiwikReactRouter from 'piwik-react-router';
 import { createBrowserHistory } from 'history';
 import Root from 'app/react/root';
 import store from 'app/redux/store';
-import sentry from 'resources/data/sentry';
 
 const {
   NODE_ENV,
@@ -29,11 +27,6 @@ export default class App extends Component {
     if (isProd) {
       global.luma.log.priority = 0;
       global.deck.log.priority = 0;
-    }
-
-    // Sentry initialization
-    if (isProd) {
-      Raven.config(sentry.dsn).install();
     }
 
     // Piwik and react-router initialization
