@@ -33,6 +33,55 @@ export const fitMapBounds = (data, accuracyThreshold, width, height) => {
   const eligibleData = data.filter(({ accuracy }) => accuracy < accuracyThreshold);
   const dedupedData = uniqBy(eligibleData, ({ latitude, longitude }) => `${latitude}-${longitude}`);
 
+
+  // Use a sane default zoom level if there's only a single eligible point.
+  if (dedupedData.length === 1) {
+    const [{ latitude, longitude }] = dedupedData;
+    return { latitude, longitude, zoom: 15 };
+  }
+
+  const { minLongitude, minLatitude, maxLongitude, maxLatitude } = dedupedData
+    .reduce((acc, val) => ({
+      minLongitude: Math.min(acc.minLongitude, val.longitude),
+      maxLongitude: Math.max(acc.maxLongitude, val.longitude),
+      minLatitude: Math.min(acc.minLatitude, val.latitude),
+      maxLatitude: Math.max(acc.maxLatitude, val.latitude),
+    }), {
+      minLongitude: Infinity,
+      maxLongitude: -Infinity,
+      minLatitude: Infinity,
+      maxLatitude: -Infinity,
+    });
+
+  const bounds = [[minLongitude, minLatitude], [maxLongitude, maxLatitude]];
+
+  return new WebMercatorViewport({ width, height }).fitBounds(bounds, { padding: 40 });
+};
+
+/**
+ * Same as fitMapBounds above, but selects only the most recent data point to fit the map to.
+ * This is less computationally intensive (esp. for large data sets) and potentially useful
+ * for sharing with friends etc.
+ */
+export const fitMapBoundsCurrent = (data, accuracyThreshold, width, height) => {
+  // Fit only location points that are unique keyed by their latitude and longitude.
+  const eligibleData = data.filter(({ accuracy }) => accuracy < accuracyThreshold);
+  // Instead of de-duplicating the data we will find the latest entry.
+  const dedupedData = eligibleData.slice().sort((a, b) => {
+    let retval;
+
+    if (a.timestamp > b.timestamp) {
+      retval = 1;
+    } else if (a.timestamp < b.timestamp) {
+      retval = -1;
+    } else {
+      retval = 0;
+    }
+
+    return retval;
+  }).slice(-1);
+
+
   // Use a sane default zoom level if there's only a single eligible point.
   if (dedupedData.length === 1) {
     const [{ latitude, longitude }] = dedupedData;
