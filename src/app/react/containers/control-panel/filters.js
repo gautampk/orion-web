@@ -46,7 +46,7 @@ FiltersContainer.propTypes = {
 const mapStateToProps = ({ context, filters }) => ({
   width: context.isCompact ? context.width - 60 : 510,
   accuracyThreshold: filters.accuracyThreshold,
-  mapFitType: options.mapFitType,
+  mapFitType: filters.mapFitType,
 });
 
 const mapDispatchToProps = (dispatch) => ({

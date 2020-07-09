@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setLocationDisplayType, setMapFitType } from 'app/redux/actions/options';
+import { setLocationDisplayType } from 'app/redux/actions/options';
 import {
   LOCATION_DISPLAY_TYPE_DOTS,
   LOCATION_DISPLAY_TYPE_PATH,

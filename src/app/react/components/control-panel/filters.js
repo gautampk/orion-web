@@ -16,7 +16,7 @@ const formatAccuracyValue = (val) => `${val.toFixed(1)} m`;
 const Filters = ({
   threshold,
   minAccuracy,
-  maxAccuracy, 
+  maxAccuracy,
   width,
   onAccuracyThresholdChange,
   mapFitType,
