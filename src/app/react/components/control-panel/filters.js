@@ -31,26 +31,6 @@ const Filters = ({
 
     <Spacing size="tiny" bottom>
       <Text size="kilo" color="gray50" uppercase bold>
-        Accuracy
-      </Text>
-      <Text size="lambda" color="gray25">
-        Filter out points less than a threshold accuracy (meters)
-      </Text>
-    </Spacing>
-
-    <Spacing size="small" bottom>
-      <Slider
-        min={minAccuracy}
-        max={maxAccuracy}
-        value={threshold}
-        formatter={formatAccuracyValue}
-        onChange={onAccuracyThresholdChange}
-        width={width}
-      />
-    </Spacing>
-
-    <Spacing size="tiny" bottom>
-      <Text size="kilo" color="gray50" uppercase bold>
         Map Fitting
       </Text>
       <Text size="lambda" color="gray25">
@@ -58,13 +38,33 @@ const Filters = ({
       </Text>
     </Spacing>
 
-    <Tabs
-      onChange={onMapFitTypeChange}
-      value={mapFitType}
-      options={[
-        { value: MAP_FIT_TYPE_CURRENT, label: 'Current' },
-        { value: MAP_FIT_TYPE_FULL, label: 'Full' },
-      ]}
+    <Spacing size="small" bottom>
+      <Tabs
+        onChange={onMapFitTypeChange}
+        value={mapFitType}
+        options={[
+          { value: MAP_FIT_TYPE_CURRENT, label: 'Current' },
+          { value: MAP_FIT_TYPE_FULL, label: 'Full' },
+        ]}
+      />
+    </Spacing>
+
+    <Spacing size="tiny" bottom>
+      <Text size="kilo" color="gray50" uppercase bold>
+        Accuracy
+      </Text>
+      <Text size="lambda" color="gray25">
+        Filter out points less than a threshold accuracy (meters)
+      </Text>
+    </Spacing>
+
+    <Slider
+      min={minAccuracy}
+      max={maxAccuracy}
+      value={threshold}
+      formatter={formatAccuracyValue}
+      onChange={onAccuracyThresholdChange}
+      width={width}
     />
   </div>
 );
