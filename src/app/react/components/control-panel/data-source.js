@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Label, SelectList, Spacing, Tabs, Text, TextField } from 'react-elemental';
+import {
+  Label, SelectList, Spacing, Tabs, Text, TextField,
+} from 'react-elemental';
 import {
   MAP_FIT_TYPE_CURRENT,
   MAP_FIT_TYPE_FULL,
